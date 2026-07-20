@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Happy Birthday, David</title>
+<title>Happy Birthday!</title>
 
-<!-- Sans-serif type family for all interface text, plus a soft handwritten face reserved
-     only for the personal notes and letter, as the brief calls for. -->
+<!-- Sans-serif for interface chrome; a pencil-like handwriting face for anything
+     "written" in the notebook — the intro lines, and the scrapbook notes/letter. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Work+Sans:wght@300;400;500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
@@ -18,83 +18,99 @@
 <!-- Ambient floating dust particles, sit behind everything, generated in JS -->
 <div class="dust-field" id="dustField" aria-hidden="true"></div>
 
-<!-- ============================= INTRO SCREEN ============================= -->
-<section class="screen intro-screen" id="introScreen" aria-live="polite">
-  <div class="paper-texture" aria-hidden="true"></div>
-  <div class="intro-content">
-    <h1 class="intro-title" id="introTitle">Happy Birthday David!</h1>
-    <p class="intro-message" id="introMessage">
-      Because I can&rsquo;t celebrate with you in person, I wanted to do something that could
-      convey similar sentiments. AND you gotta work for it ;) Three puzzles for you to
-      architect, and once completed, they will reveal a little note hehe.
-    </p>
-    <button class="btn btn-primary" id="beginBtn">Begin</button>
-  </div>
-</section>
+<!-- Single shared paper texture for the whole notebook, instead of repeating it per page -->
+<div class="paper-texture" aria-hidden="true"></div>
 
-<!-- ============================= PUZZLE SCREEN ============================= -->
-<section class="screen puzzle-screen" id="puzzleScreen" hidden>
-  <div class="paper-texture" aria-hidden="true"></div>
+<main class="notebook" id="notebook">
 
-  <header class="puzzle-header">
-    <p class="puzzle-eyebrow" id="puzzleEyebrow">Landmark 1 of 3</p>
-    <h2 class="puzzle-title" id="puzzleTitle">V&amp;A East Storehouse</h2>
-  </header>
+  <!-- ============================= INTRO PAGE =============================
+       The notebook opening on its first page: two lines written in pencil,
+       then a small Begin button. No "Happy Birthday" here on purpose — that
+       reveal is saved for the finale. -->
+  <section class="page intro-page" id="introScreen" aria-live="polite">
+    <div class="intro-content">
+      <p class="pencil-line" id="introLine1">I&rsquo;ve hidden three memories.</p>
+      <p class="pencil-line" id="introLine2">You only have to rebuild them.</p>
+      <button class="btn btn-primary" id="beginBtn">Begin</button>
+    </div>
+  </section>
 
-  <div class="puzzle-stage">
-    <div class="building-wrap" id="buildingWrap">
-      <!-- board = target grid where pieces snap; illustration sits behind it -->
+  <!-- ============================= PUZZLE PAGE =============================
+       One notebook page, reused for each chapter. script.js swaps the
+       illustration/board/tray per landmark and reveals the matching
+       scrapbook note below once that chapter's puzzle is solved. The
+       building's name is never shown — only the chapter number and a
+       riddle prompt. -->
+  <section class="page puzzle-page" id="puzzleScreen" hidden>
+    <header class="page-header">
+      <p class="chapter-label" id="puzzleEyebrow">Chapter One</p>
+      <h2 class="page-prompt" id="puzzleTitle">Can you remember where this is?</h2>
+    </header>
+
+    <!-- illustration + drop targets; script.js slices one master SVG into
+         pieces and lays them over this board -->
+    <div class="puzzle-area" id="buildingWrap">
       <div class="building-illustration" id="buildingIllustration"></div>
       <div class="board" id="board"></div>
       <div class="glow-veil" id="glowVeil" aria-hidden="true"></div>
       <div class="rising-particles" id="risingParticles" aria-hidden="true"></div>
-      <div class="doors" id="doors" aria-hidden="true">
-        <div class="door door-left"></div>
-        <div class="door door-right"></div>
-      </div>
     </div>
 
     <div class="tray-wrap">
       <p class="tray-label">Drag each piece into place</p>
       <div class="tray" id="tray"></div>
     </div>
-  </div>
 
-  <!-- Handwritten note that rises from the doorway once a puzzle is solved -->
-  <div class="note-panel" id="notePanel" hidden>
-    <div class="note-card">
-      <h3 class="note-title" id="noteTitle">Act I: Our First Date!</h3>
-      <p class="note-body" id="noteBody">[I'll replace this with my own words.]</p>
-      <button class="btn btn-secondary" id="continueBtn">Continue</button>
+    <!-- Scrapbook notes — written ahead of time and taped onto the page,
+         rather than generated as a popup. script.js shows the one matching
+         the current chapter once its puzzle is complete. -->
+    <div class="scrapbook-note" id="note-0" hidden>
+      <span class="tape tape-left" aria-hidden="true"></span>
+      <span class="tape tape-right" aria-hidden="true"></span>
+      <h3 class="note-title">Act I: Our First Date!</h3>
+      <p class="note-body">[I'll replace this with my own words.]</p>
+      <button class="btn btn-secondary continue-btn">Continue</button>
     </div>
-  </div>
-</section>
 
-<!-- ============================= FINALE: EIFFEL TOWER NIGHT ============================= -->
-<section class="screen finale-screen" id="finaleScreen" hidden>
-  <div class="sky" id="finaleSky">
-    <div class="stars" id="stars" aria-hidden="true"></div>
-  </div>
-  <div class="city-silhouette" aria-hidden="true"></div>
-  <div class="tower-wrap" id="towerWrap"></div>
-  <div class="envelope" id="envelope" hidden tabindex="0" role="button" aria-label="Open your birthday letter">
-    <div class="envelope-glow" aria-hidden="true"></div>
-    <svg viewBox="0 0 120 84" class="envelope-svg" aria-hidden="true">
-      <rect x="2" y="2" width="116" height="80" rx="4" class="env-body"/>
-      <path d="M2 6 L60 52 L118 6" class="env-flap"/>
-    </svg>
-    <p class="envelope-hint">tap to open</p>
-  </div>
-</section>
+    <div class="scrapbook-note" id="note-1" hidden>
+      <span class="tape tape-left" aria-hidden="true"></span>
+      <span class="tape tape-right" aria-hidden="true"></span>
+      <h3 class="note-title">Act II: Summer</h3>
+      <p class="note-body">[I'll replace this.]</p>
+      <button class="btn btn-secondary continue-btn">Continue</button>
+    </div>
 
-<!-- ============================= LETTER ============================= -->
-<section class="screen letter-screen" id="letterScreen" hidden>
-  <div class="letter-backdrop"></div>
-  <div class="letter-paper" id="letterPaper">
-    <p class="letter-body" id="letterBody">[I'll replace this with my full birthday letter to you.]</p>
-    <p class="letter-signoff">Happy Birthday ❤️</p>
-  </div>
-</section>
+    <!-- Chapter Three (Eiffel Tower) has no note here — solving it leads
+         straight into the finale below. -->
+  </section>
+
+  <!-- ============================= FINALE ============================= -->
+  <section class="page finale-screen" id="finaleScreen" hidden>
+    <div class="sky" id="finaleSky">
+      <div class="stars" id="stars" aria-hidden="true"></div>
+    </div>
+    <div class="city-silhouette" aria-hidden="true"></div>
+    <div class="tower-wrap" id="towerWrap"></div>
+    <div class="envelope" id="envelope" hidden tabindex="0" role="button" aria-label="Open your birthday letter">
+      <div class="envelope-glow" aria-hidden="true"></div>
+      <svg viewBox="0 0 120 84" class="envelope-svg" aria-hidden="true">
+        <rect x="2" y="2" width="116" height="80" rx="4" class="env-body"/>
+        <path d="M2 6 L60 52 L118 6" class="env-flap"/>
+      </svg>
+      <p class="envelope-hint">tap to open</p>
+    </div>
+  </section>
+
+  <!-- ============================= FINAL LETTER ============================= -->
+  <section class="page letter-screen" id="letterScreen" hidden>
+    <div class="letter-backdrop"></div>
+    <div class="letter-paper" id="letterPaper">
+      <p class="letter-body" id="letterBody">[I'll replace this with my full birthday letter to you.]</p>
+      <p class="letter-signoff">Happy Birthday ❤️</p>
+    </div>
+  </section>
+
+</main>
 
 <script src="script.js"></script>
 </body>
