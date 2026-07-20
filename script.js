@@ -189,9 +189,7 @@
       svg: svgStorehouse(),
       noteId: "note-0",
       noteTitle: "Act I: Our First Date!",
-      noteBody: "It was a decently sunny February weekend in Stratford - and my first weekend in London too. I got lost in the massive station, and I found you standing by a hotdog stand. I remember thinking you looked very kind in your grey coat. We spent 5 hours together clocking 12,000 steps as we walked around Hackney Wick, Queen Elizabeth Olympic Park (where you questioned my cute camera), and then Whitechapel. And we ended at Costa Coffee, where you bought me a flat white - which I now realise you rarely do.
-
-I quote myself from my diary “I think this is good”. 
+      noteBody: `It was a decently sunny February weekend in Stratford - and my first weekend in London too. I got lost in the massive station, and I found you standing by a hotdog stand. I remember thinking you looked very kind in your grey coat. We spent 5 hours together clocking 12,000 steps as we walked around Hackney Wick, Queen Elizabeth Olympic Park (where you questioned my cute camera), and then Whitechapel. And we ended at Costa Coffee, where you bought me a flat white - which I now realise you rarely do. I quote myself from my diary “I think this is good”` 
 ",
     },
     {
@@ -202,7 +200,7 @@ I quote myself from my diary “I think this is good”.
       svg: svgHamptonCourt(),
       noteId: "note-1",
       noteTitle: "Act II: Summer",
-      noteBody: "I feel like Hampton Court Palace was a special date for us. It felt almost like a day trip and I think that was also the first time I stayed over 2 nights in a row. We took many cute pictures that day, and sat by the topiaries and gardens basking in nice weather. Oh and that was indeed the day where regular feeding times became a thing lol. Thank you for always managing my hanger and being so patient with me x",
+      noteBody: `I feel like Hampton Court Palace was a special date for us. It felt almost like a day trip and I think that was also the first time I stayed over 2 nights in a row. We took many cute pictures that day, and sat by the topiaries and gardens basking in nice weather. Oh and that was indeed the day where regular feeding times became a thing lol. Thank you for always managing my hanger and being so patient with me x`,
     },
     {
       label: "Chapter Three",
