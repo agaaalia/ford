@@ -189,8 +189,7 @@
       svg: svgStorehouse(),
       noteId: "note-0",
       noteTitle: "Act I: Our First Date!",
-      noteBody: `message will be pasted here`
-",
+      noteBody: `message will be pasted here`,
     },
     {
       label: "Chapter Two",
